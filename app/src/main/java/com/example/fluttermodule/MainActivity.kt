@@ -31,14 +31,15 @@ class MainActivity : AppCompatActivity() {
             .put("my_engine_id", flutterEngine)
 
         // Pass message to flutter module
-        MethodChannel(
+        val methodCHannel = MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
             "demo_channel"
         )
-            .invokeMethod("fromHostToClient", "hello from android")
+
 
         // Button click listener
         findViewById<Button>(R.id.button1).setOnClickListener {
+            methodCHannel.invokeMethod("fromHostToClient", "hello from android")
             startActivity(
                 FlutterActivity
                     .withCachedEngine("my_engine_id")
