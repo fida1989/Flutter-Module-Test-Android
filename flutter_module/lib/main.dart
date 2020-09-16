@@ -28,8 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel("demo_channel");
-  String text = "";
-
+  String text = "Data From Native";
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               text,
             ),
+            Container(
+              height: 30,
+            ),
+            RaisedButton(
+              onPressed: () {
+_showNativeView();
+              },
+              child: Text("Go Back"),
+            )
           ],
         ),
       ),
@@ -58,6 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
         text = data;
       });
     }
+  }
+
+  Future<void> _showNativeView() async {
+    await platform.invokeMethod('show_native',"hello from flutter");
   }
 
   @override
